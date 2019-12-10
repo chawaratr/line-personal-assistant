@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/webhook", (req, res) => {
-  console.log("POST: /");
+  console.log("Req:", req);
   console.log("Body: ", req.body);
 
   //Create an instance

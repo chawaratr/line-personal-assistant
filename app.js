@@ -17,9 +17,21 @@ app.get("/", (req, res) => {
 });
 
 app.post("/webhook", (req, res) => {
-  console.log("Req:", req);
-  console.log("Body: ", req.body);
+  //console.log("Body: ", req.body);
+  let userStorage =
+    req.body.originalDetectIntentRequest.payload.user.userStorage || {};
+  let userId;
+  console.log("userStorage", userStorage);
 
+  if (userId in userStorage) {
+    userId = userStorage.userId;
+  } else {
+    var uuid = require("uuid/v4");
+    userId = uuid();
+    userStorage.userId = userId;
+  }
+
+  console.log("userID", userId);
   //Create an instance
   const agent = new WebhookClient({
     request: req,
